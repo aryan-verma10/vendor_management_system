@@ -123,7 +123,6 @@ def po_metrics_after_completion(sender, instance, update_fields, **kwargs):
         fulfillment_rate = fulfillment_rate_func(instance.vendor_id.vendor_code)
 
 
-
         payload = {
             "vendor_id": instance.vendor_id.vendor_code,
             "performance_date": timezone.now(),
