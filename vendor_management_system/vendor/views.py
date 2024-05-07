@@ -217,7 +217,7 @@ class PurchaseOrderApi(APIView):
             # if vendor search is given
             purchase_order_objs = None
             if vendor_search:
-                purchase_order_objs = PurchaseOrder.objects.filter(Q(vendor_id__icontains = vendor_search)| Q(vendor_id__name__icontains = vendor_search))
+                purchase_order_objs = PurchaseOrder.objects.filter(Q(vendor_id__vendor_code__icontains = vendor_search)| Q(vendor_id__name__icontains = vendor_search))
             
             else:
                 purchase_order_objs = PurchaseOrder.objects.all()
@@ -434,6 +434,7 @@ class PurchaseOrderCompleteStatusApi(APIView):
                                              status_code = status.HTTP_400_BAD_REQUEST,
                                              message = ResponseConstant.ORDER_IS_NOT_ACKNOWLEDGED_BY_VENDOR)
             
+
             # add the if the order is already completed or canceled
             purchase_order_obj.status = po_status.upper()
 
