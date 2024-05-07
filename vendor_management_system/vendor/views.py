@@ -149,6 +149,15 @@ class VendorByIdApi(APIView):
                                              status_code = status.HTTP_404_NOT_FOUND,
                                              message = ResponseConstant.VENDOR_NOT_FOUND)
 
+            # delete all the purchase order by current vendor
+            purchase_order_objs = PurchaseOrder.objects.filter(vendor_id = vendor_obj.vendor_code)
+            purchase_order_objs.delete()
+
+            # delete all the vendor performance history of current vendor
+            purchase_history_objs = VendorPerformanceHistory.objects.filter(vendor_id = vendor_id.vendor_code)
+            purchase_history_objs.delete()
+
+
             # deleting vendor from the database
             vendor_obj.delete()
 
